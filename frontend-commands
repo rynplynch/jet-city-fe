@@ -1,0 +1,25 @@
+
+-Build Docker container and push to my Docker repo. Then deploy{
+kubectl delete deploy frontend
+
+sudo docker build -t rynplynch/frontend:latest .
+
+sudo docker push rynplynch/frontend:latest
+
+-From app root directory
+ kubectl apply -f deployment/deployment.yaml 
+
+-monitor node.js server console
+ kubectl logs --follow
+
+-run docker image outside kubernetes
+ sudo docker run rynplynch/frontend:latest
+
+-exec into a container
+ kubectl exec --stdin --tty <container name>> -- /bin/bash
+
+ -show pod env var while exec
+ printenv
+
+ -expose service in minikube
+ minikube service frontend
