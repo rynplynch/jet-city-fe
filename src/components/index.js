@@ -1,5 +1,5 @@
-import Logo from './Logo'
 import NavBar from './NavBar'
-import Links from './Links'
+import Clock from './Clock'
 
-export {NavBar, Links, Logo }
+
+export { NavBar, Clock }

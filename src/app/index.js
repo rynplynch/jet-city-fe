@@ -1,44 +1,32 @@
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { NavBar } from '../components'
-import {ClientInsert, ClientList, ClientUpdate} from '../pages'
-import {ProjectInsert, ProjectList, ProjectUpdate} from '../pages'
-import {WorkstationInsert, WorkstationList, WorkstationUpdate} from '../pages'
-import '../style/App.css'
+import { ClientPage, ProjectPage} from '../pages'
+import GlobalStyles from '../style/GlobalStyles'
+import configureStore from '../store/configureStore'
+import { Provider } from 'react-redux'
+const store = configureStore();
+
 function App() {
 
-
+    // const triggerText = 'Open Form';
+    // const onSubmit = (event) => {
+    //     event.preventDefault(event);
+    //     console.log(event.target.name.value);
+    //     console.log(event.target.email.value);
+    // };
     return (
-        <Router>
-            <NavBar />
+      <Provider store={store}>
+        <Router >
+            <GlobalStyles/>
+            <NavBar/>
             <Switch>
-
-                <Route path="/client/list" exact component={ClientList} />
-                <Route path="/client/create" exact component={ClientInsert} />
-                <Route
-                    path="/client/update/:id"
-                    exact
-                    component={ClientUpdate}
-                />
-
-                <Route path="/project/create/:id" exact component={ProjectInsert} />
-                <Route path="/project/list/:id" exact component={ProjectList} />
-                <Route
-                    path="/project/update/:id"
-                    exact
-                    component={ProjectUpdate}
-                />
-
-                <Route path="/workstation/create/:id" exact component={WorkstationInsert} />
-                <Route path="/workstation/list/:id" exact component={WorkstationList} />
-                <Route
-                    path="/workstation/update/:id"
-                    exact
-                    component={WorkstationUpdate}
-                />
-
+                <Route path="/show/cards/clients" exact component={ClientPage} />
+                <Route path="/show/cards/client/:id/projects" exact component={ProjectPage} />
             </Switch>
         </Router>
+      </Provider>
+                
     )
 }
 

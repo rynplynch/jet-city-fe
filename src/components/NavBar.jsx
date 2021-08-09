@@ -1,30 +1,33 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
+import React from 'react'
+import logo from '../jet-city-logo.png'
+import Clock from './Clock'
 
-import Logo from './Logo'
-import Links from './Links'
+import 
+{
+    Nav,
+    NavbarContainer,
+    NavLogo,
+    Menu,
+    MenuItem,
+    MenuLink,
+} from '../style/Navbar';
+export const NavBar = () => {
+    return (
+        <Nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <NavbarContainer>
+            <NavLogo to='/' className="navbar-brand" href='jet-city-logo.png'>
+                <img src={logo} width="193" height="54" alt="jet city I.T. logo" />
+            </NavLogo>
 
-const Container = styled.div.attrs({
-    className: 'container',
-})``
-
-const Nav = styled.nav.attrs({
-    className: 'navbar navbar-expand-lg navbar-dark bg-dark',
-})`
-    margin-bottom: 20 px;
-`
-
-class NavBar extends Component {
-    render() {
-        return (
-            <Container>
-                <Nav>
-                    <Logo />
-                    <Links />
-                </Nav>
-            </Container>
-        )
-    }
+            <Menu>
+                <MenuItem>
+                    <MenuLink to="/show/cards/clients">Go to Clients</MenuLink>
+                </MenuItem>
+            </Menu> 
+            <Clock />
+            </NavbarContainer>
+        </Nav>
+    )
 }
 
 export default NavBar
