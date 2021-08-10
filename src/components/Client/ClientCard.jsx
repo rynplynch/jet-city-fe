@@ -2,6 +2,7 @@ import React from 'react'
 import { removeClient } from '../../store/clients';
 import { useDispatch } from 'react-redux'
 import {CardHeading, CardWrapper, CardButton, CardFieldset, CardBody, CardLink} from '../../style/Card'
+import UpdateClientModal from './UpdateClientModal';
 
 export default function ClientCard(props) {
   const dispatch = useDispatch();
@@ -12,6 +13,9 @@ export default function ClientCard(props) {
       <CardBody>
         <CardFieldset>
           <CardLink href={`/show/cards/client/${ props.id }/projects`}>Go to Projects</CardLink>
+        </CardFieldset>
+        <CardFieldset>
+          <UpdateClientModal id= {props.id}/>
         </CardFieldset>
         <CardFieldset>
           <CardButton onClick={() => 

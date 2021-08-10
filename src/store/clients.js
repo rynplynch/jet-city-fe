@@ -34,13 +34,20 @@ const slice = createSlice({
             const clientId = action.payload.id
             const index = clients.list.findIndex(client => client.id === clientId);
             clients.list.splice(index, 1);
+        },
+
+        clientUpdated: (clients, action) => {
+            const clientId = action.payload[0].id
+            const index = clients.list.findIndex(client => client.id === clientId);
+            clients.list[index] = action.payload[0]
         }
     }
 })
 
 export const { 
     clientAdded, 
-    clientRemoved, 
+    clientRemoved,
+    clientUpdated, 
     clientsReceived, 
     clientsRequested,
     clientsRequestFailed 
@@ -81,5 +88,14 @@ export const removeClient = client =>
         method: 'delete',
         data: client,
         onSuccess: clientRemoved.type,
+        onError: clientsRequestFailed.type
+    })
+
+export const updateClient = client =>
+    apiCallBegan({
+        url: url + client.id,
+        method: 'put',
+        data: client,
+        onSuccess: clientUpdated.type,
         onError: clientsRequestFailed.type
     })
