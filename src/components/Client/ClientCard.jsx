@@ -12,14 +12,13 @@ export default function ClientCard(props) {
       <CardHeading>{props.name}</CardHeading>
       <CardBody>
         <CardFieldset>
-          <CardLink href={`/show/cards/client/${ props.id }/projects`}>Go to Projects</CardLink>
+          <CardLink href={`/show/cards/client/project/${ props.id }`}>Go to Projects</CardLink>
         </CardFieldset>
         <CardFieldset>
           <UpdateClientModal id= {props.id}/>
         </CardFieldset>
         <CardFieldset>
-          <CardButton onClick={() => 
-            dispatch(removeClient({id: props.id}))} type="button">
+          <CardButton onClick={() => dispatch(removeClient({id: props.id}))} type="button">
             Delete Client
           </CardButton>
         </CardFieldset>

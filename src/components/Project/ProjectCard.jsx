@@ -11,11 +11,11 @@ export default function ProjectCard(props) {
       <CardHeading>{props.name}</CardHeading>
       <CardBody>
         <CardFieldset>
-          <CardLink href={`/show/cards/client/${ props._id }/projects`}>Go to Workstations</CardLink>
+          <CardLink href={`/show/cards/client/${ props.id }/projects`}>Go to Workstations</CardLink>
         </CardFieldset>
         <CardFieldset>
           <CardButton onClick={() => 
-            dispatch(removeProject({_id: props._id}))} type="button">
+            dispatch(removeProject({id: props.id}))} type="button">
             Delete Project
           </CardButton>
         </CardFieldset>

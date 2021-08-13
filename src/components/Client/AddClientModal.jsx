@@ -2,7 +2,6 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { addClient } from '../../store/clients';
 import {ModalContainer} from './ModalContainer';
-import moment from 'moment'
 
 export default function AddClientModal() {
     const dispatch = useDispatch();

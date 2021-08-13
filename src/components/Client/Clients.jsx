@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadClients } from '../../store/clients';
 import {CardHeading, CardWrapper, CardButton, CardFieldset, CardBody, CardLink} from '../../style/Card'
-import { Container } from '../../style/GlobalStyles';
+import { CardContainer } from '../../style/GlobalStyles';
 import ClientCard from './ClientCard'
 
 export default function Clients() {
@@ -20,5 +20,5 @@ export default function Clients() {
         elements.push(<ClientCard key={i} name={clients[i].name} id={clients[i].id}/>)
     }
 
-    return <Container>{elements}</Container>
+    return <CardContainer>{elements}</CardContainer>
 }

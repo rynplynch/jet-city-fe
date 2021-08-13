@@ -15,7 +15,6 @@ background-color: rgba(0, 0, 0, 0.5);
 box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
 display: flex;
 justify-content: center;
-align-items: center;
 `;
 
 export const NavbarContainer = styled.div`
@@ -100,9 +99,7 @@ font-weight: bold;
 font-size: 2rem;
 color: #fff;
 display: flex;
-justify-content: space-between;
 align-items: center;
-padding: 1rem 2rem;
 height: 100%;
 transition: all .2s ease;
 

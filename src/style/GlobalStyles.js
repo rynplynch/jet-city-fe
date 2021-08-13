@@ -37,28 +37,16 @@ body{
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin:  auto;
     padding-top: 50px;
-    max-width: 1300px;
-    width: 90%;
+    width: 100%;
+`;
 
-    @media (max-width:400px){
-        padding: 0 10px;
-    }
-    @media (max-width:991px) {
-        padding: 0 30px;
-    }
-
-    @media (min-width: 1500px) {
-        max-width: 1500px;
-    }
-
-    @media (min-width: 1800px) {
-        max-width: 1800px;
-        padding: 0 30px;
-    }
+export const CardContainer = styled.div`
+    display: flex;  
+    flex-wrap: wrap;
+    margin-top: 30px;
+    width: 100%;
 `;
 
 export const Button = styled.button`

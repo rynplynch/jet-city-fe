@@ -15,7 +15,7 @@ const slice = createSlice({
     reducers: {
         //action handlers, events 
         projectAdded: (projects, action) => {
-            projects.list.push(action.payload);
+            projects.list.push(action.payload[0]);
         },
         
         projectsRequested: (projects, action) => {
@@ -31,7 +31,7 @@ const slice = createSlice({
         },
 
         projectsReceived: (projects, action) => {
-            projects.list = action.payload.data;
+            projects.list = action.payload;
             projects.loading = false;
             projects.lastFetch = Date.now();
         },
@@ -41,9 +41,8 @@ const slice = createSlice({
         },
 
         projectRemoved: (projects, action) => {
-            const project_id = action.payload.data._id
-            const index = projects.list.findIndex(project => project._id === project_id);
-            console.log(action.payload.data)
+            const project_id = action.payload.id
+            const index = projects.list.findIndex(project => project.id === project_id);
             projects.list.splice(index, 1);
         }
     }
@@ -65,10 +64,10 @@ const projectUrl = './project/'
 const allProjectUrl = './client/project/'
 
 //Actions Creators, the command
-export const loadProjectsOfClient = clientId => (dispatch, getState) => {
+export const loadProjectsOfClient = client=> (dispatch, getState) => {
     dispatch(
         apiCallBegan({        
-            url: allProjectUrl + clientId,
+            url: allProjectUrl + client.id,
             onStart: projectsRequested.type,
             onSuccess: projectsReceived.type,
             onError: projectsRequestFailed.type
@@ -87,7 +86,7 @@ export const addProject = project =>
 
 export const removeProject = project =>
     apiCallBegan({
-        url: projectUrl + project._id,
+        url: projectUrl + project.id,
         method: 'delete',
         onSuccess: projectRemoved.type,
         onError: projectsRequestFailed.type

@@ -8,6 +8,7 @@ const Trigger = ({ triggerText, buttonRef, showModal }) => {
     >
       {triggerText}
     </ModalTrigger>
+
   );
 };
 export default Trigger;
