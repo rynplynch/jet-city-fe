@@ -10,7 +10,7 @@ export default function store() {
         reducer: reducer,
         middleware: [
             ...getDefaultMiddleware(),
-            //logger({destination: 'console'}),
+            logger({destination: 'console'}),
             api
         ]
     })

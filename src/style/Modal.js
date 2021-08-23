@@ -47,8 +47,9 @@ export const ModalClose = styled.button`
 
 export const ModalTrigger = styled.button`
 position: relative;
-width: 75%;
-padding: 12px 0;
+width: 100%;
+margin-top: 12px;
+padding: 12px 12px;
 font-family: inherit;
 font-size: 14px;
 font-weight: 700;

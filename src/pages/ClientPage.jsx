@@ -7,9 +7,7 @@ export default function ClientPage() {
         
         <Container> 
             <AddClientModal/>
-            <CardContainer>
-                <Clients/>
-            </CardContainer>
+            <Clients/>
         </Container>
     )
 }

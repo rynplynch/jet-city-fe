@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 const CardWrapper = styled.div`
   width: 300px;
-  margin: 0 auto 0;
+  margin: 10px auto 0;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
   border-radius: 5px;
   background: rgba(50,50,50) ; !important
@@ -12,12 +12,13 @@ const CardWrapper = styled.div`
 const CardHeader = styled.header`
   padding-top: 32px;
   padding-bottom: 32px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
 `;
 
 const CardHeading = styled.h1`
-  padding-top: 32px;
-  padding-bottom: 32px;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
 `;
@@ -25,17 +26,29 @@ const CardHeading = styled.h1`
 const CardBody = styled.div`
   padding-right: 32px;
   padding-left: 32px;
-  
+  padding-bottom: 32px;
 `;
 
 const CardFieldset = styled.fieldset`
   padding: 10px;
   border: 0;
-  text-align: center;
   & + & {
     margin-top: 24px;
   }
 
+`;
+
+const TBody = styled.tbody`
+  display:table;
+  width:100%;
+`;
+
+const TRow = styled.tr`
+  display:table-row;
+`;
+
+const TData = styled.td`
+  display: table-cell;  
 `;
 
 const CardInput = styled.input`
@@ -98,9 +111,6 @@ const CardOptionsNote = styled.small`
 const CardOptions = styled.ul`
   padding: 0;
   margin: 16px 0 8px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -113,10 +123,31 @@ const CardOptionsItem = styled.li`
   }
 `;
 
+const CardAddButton = styled.button`
+  width: 75%;
+  margin-top: 12px;
+  padding: 6px 6px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #252525;
+  border: 0;
+  border-radius: 35px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+
+  &:hover {
+    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.16);
+    transform: translate(0, -5px);
+  }
+`;
 
 const CardButton = styled.button`
-  width: 75%;
-  padding: 12px 0;
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px 12px;
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
@@ -149,4 +180,4 @@ const CardLink = styled.a`
   }
 `;
 
-export {CardWrapper, CardHeader, CardHeading, CardBody, CardFieldset, CardInput, CardIcon, CardOptionsNote, CardOptions, CardOptionsItem, CardButton, CardLink}
+export {TRow, TBody, TData, CardAddButton, CardWrapper, CardHeader, CardHeading, CardBody, CardFieldset, CardInput, CardIcon, CardOptionsNote, CardOptions, CardOptionsItem, CardButton, CardLink}

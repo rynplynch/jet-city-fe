@@ -2,7 +2,7 @@ import axios from 'axios'
 import * as actions from '../api'
 
 //Will need to add this to config file for Docker deployment
-const connectString = 'http://localhost:3000/api'
+const connectString = 'http://localhost:3000/api/v1'
 
 
 

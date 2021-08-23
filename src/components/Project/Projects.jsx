@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadProjectsOfClient } from '../../store/projects';
-import {CardHeading, CardWrapper, CardButton, CardFieldset, CardBody, CardLink} from '../../style/Card'
 import { CardContainer } from '../../style/GlobalStyles';
 import ProjectCard from './ProjectCard';
 import {useParams} from 'react-router-dom'

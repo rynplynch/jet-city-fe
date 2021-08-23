@@ -1,39 +1,109 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect'
+import { apiCallBegan } from './api';
 
-let lastId = -1;
 
 const slice = createSlice({
     name: 'workstations',
-    initialState: [],
+
+    initialState: {
+        list: [],
+        loading: false,
+        lastFetch: null,
+    },
+
     reducers: {
-        //actions => action handlers
+        //action handlers, events 
         workstationAdded: (workstations, action) => {
-            workstations.push({
-                id: ++lastId,
-                name: action.payload.name,
-                flagged: false
-            })
+            workstations.list.push(action.payload[0]);
+        },
+        
+        workstationsRequested: (workstations, action) => {
+            workstations.loading = true;
+        },
+
+        workstationAddRequested: (workstations, action) => {
+            workstations.loading = true;
+        },
+
+        workstationRemoveRequested: (workstation, action) => {
+            workstation.loading = true;
+        },
+
+        workstationsReceived: (workstations, action) => {
+            workstations.list = action.payload;
+            workstations.loading = false;
+            workstations.lastFetch = Date.now();
+        },
+
+        workstationsRequestFailed: (workstations, action) => {
+            workstations.loading = false;
         },
 
         workstationRemoved: (workstations, action) => {
-            workstations.splice(action.payload.id, 1)
+            const workstation_id = action.payload.id
+            const index = workstations.list.findIndex(workstation => workstation.id === workstation_id);
+            workstations.list.splice(index, 1);
         },
-
-        workstationFlagged: (workstations, action) => {
-            const index = workstations.findIndex(workstation => workstation.id === action.payload.id);
-            workstations[index].flagged = true;
+    
+        workstationUpdated: (workstations, action) => {
+            const workstation_id = action.payload.id
+            const index = workstations.list.findIndex(workstation => workstation.id === workstation_id);
+            workstations.list[index] = action.payload
         }
     }
 })
 
-export const { workstationAdded, workstationRemoved, workstationFlagged } = slice.actions
+const { 
+    workstationsRequested,
+    workstationsReceived,
+    workstationsRequestFailed,
+    workstationAdded, 
+    workstationRemoved,
+    workstationAddRequested ,
+    workstationRemoveRequested,
+    workstationUpdated
+} = slice.actions
 export default slice.reducer
 
-//Selector with Memoization
-// f(x) => y { input: 1, output : 2 }
-// workstations => get flagged workstations from the cache
-export const getFlaggedWorkstations = createSelector(
-    state => state.entities.workstations,
-    workstations => workstations.filter(workstation => workstation.flagged)
-)
+//Endpoint of API should add to .env?
+const workstationUrl = './workstation/'
+const allWorkstationUrl = './project/workstation/'
+
+//Actions Creators, the command
+export const loadWorkstationsOfProject = project=> (dispatch, getState) => {
+    dispatch(
+        apiCallBegan({        
+            url: allWorkstationUrl + project.id,
+            onStart: workstationsRequested.type,
+            onSuccess: workstationsReceived.type,
+            onError: workstationsRequestFailed.type
+        })
+    )
+}
+
+export const addWorkstation = workstation => 
+    apiCallBegan({
+        url: workstationUrl,
+        method: 'post',
+        data: workstation,
+        onStart: workstationAddRequested.type,
+        onSuccess: workstationAdded.type
+    })
+
+export const updateWorkstation = workstation =>
+    apiCallBegan({
+        url: workstationUrl + workstation.id,
+        method: 'put',
+        data: workstation,
+        onSuccess: workstationUpdated.type,
+        onError: workstationsRequestFailed.type
+    })
+
+export const removeWorkstation = workstation =>
+    apiCallBegan({
+        url: workstationUrl + workstation.id,
+        method: 'delete',
+        onSuccess: workstationRemoved.type,
+        onError: workstationsRequestFailed.type
+    })
