@@ -27,12 +27,14 @@ const slice = createSlice({
         },
 
         clientAdded: (clients, action) => {
-            clients.list.push(action.payload[0]);
+            clients.list.push(action.payload);
         },
 
         clientRemoved: (clients, action) => {
             const clientId = action.payload.id
+            console.log(clients)
             const index = clients.list.findIndex(client => client.id === clientId);
+            console.log(index)
             clients.list.splice(index, 1);
         },
 
@@ -84,7 +86,7 @@ export const addClient = client =>
 
 export const removeClient = client =>
     apiCallBegan({
-        url: url + client.id,
+        url: url,
         method: 'delete',
         data: client,
         onSuccess: clientRemoved.type,

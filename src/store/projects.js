@@ -15,7 +15,7 @@ const slice = createSlice({
     reducers: {
         //action handlers, events 
         projectAdded: (projects, action) => {
-            projects.list.push(action.payload[0]);
+            projects.list.push(action.payload);
         },
         
         projectsRequested: (projects, action) => {
